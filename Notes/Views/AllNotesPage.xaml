@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Notes.Views.AllNotesPage"
+             Title="My Notes">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+
+            <!-- Header with name in a colored bar -->
+            <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,0.1"
+                         AbsoluteLayout.LayoutFlags="WidthProportional,XProportional,PositionProportional">
+                <Grid BackgroundColor="DarkOrange" HeightRequest="60" VerticalOptions="Start">
+                    <Label Text="Diego Correa"
+                           FontSize="24"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center"
+                           TextColor="White"/>
+                </Grid>
+            </StackLayout>
+
+            <!-- Display notes in a list -->
+            <CollectionView x:Name="notesCollection"
+                            ItemsSource="{Binding Notes}"
+                            Margin="10,60,1,10"
+                SelectionMode="Single"
+                            SelectionChanged="notesCollection_SelectionChanged"
+                            AbsoluteLayout.LayoutBounds="0,0.1,1,1"
+                            AbsoluteLayout.LayoutFlags="All">
+
+                <!-- Designate how the collection of items are laid out -->
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+
+                <!-- Define the appearance of each item in the list -->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <Label Text="{Binding Text}" FontSize="22"/>
+                            <Label Text="{Binding Date}" FontSize="14" TextColor="#FF6500"/>
+                            <BoxView Color="Orange
+                                     " HeightRequest="2" HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                        
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+
+            <!-- Floating Add Button -->
+            <Button Text="+" 
+                    Clicked="Add_Clicked"
+                    FontSize="24"
+                    BackgroundColor="DarkOrange"
+                    TextColor="White"
+                    CornerRadius="30"
+                    WidthRequest="60"
+                    HeightRequest="60"
+                    AbsoluteLayout.LayoutBounds="0.90,0.95,AutoSize,AutoSize"
+                    AbsoluteLayout.LayoutFlags="PositionProportional" />
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
